@@ -5,8 +5,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
 export const metadata: Metadata = {
-  title: 'Велес - Інтернет-провайдер',
-  description: 'Підключення інтернету, тарифи, послуги та контактна інформація',
+  title: 'Veles - Інтернет-провайдер',
+  description: 'Швидкісний та стабільний інтернет для вашого комфорту в Чернівцях та області',
 };
 
 export default function RootLayout({
