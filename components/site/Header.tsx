@@ -34,7 +34,7 @@ const Header = () => {
         <Link href="/" className="flex items-center">
           <div className="relative h-12 w-36">
             <Image 
-              src="/logo.png" 
+              src="/logo.jpg" 
               alt="Veles ISP" 
               fill
               style={{objectFit: "contain"}}

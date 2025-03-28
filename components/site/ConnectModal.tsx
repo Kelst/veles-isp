@@ -5,17 +5,22 @@ interface ConnectModalProps {
   isOpen: boolean;
   onClose: () => void;
   tariffName?: string;
+  serviceName?: string; // Додаємо опціональне поле для назви послуги
 }
 
 const ConnectModal: React.FC<ConnectModalProps> = ({ 
   isOpen, 
   onClose,
-  tariffName
+  tariffName,
+  serviceName
 }) => {
   const [phone, setPhone] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  
+  // Перевіряємо тип заявки
+  const isServiceRequest = !!serviceName;
   
   // Валідація номера телефону
   const validatePhone = (value: string) => {
@@ -40,16 +45,26 @@ const ConnectModal: React.FC<ConnectModalProps> = ({
     setError(null);
     
     try {
+      // Формуємо дані запиту залежно від типу заявки
+      const requestData = isServiceRequest 
+        ? { 
+            phone, 
+            service: serviceName,
+            type: 'service' // Для замовлення послуги
+          } 
+        : { 
+            phone, 
+            tariff: tariffName || 'Не вказано'
+            // Тип не вказуємо для сумісності зі старим API
+          };
+      
       // Відправка запиту до API для надсилання повідомлення в Telegram
       const response = await fetch('/api/send-telegram', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          phone, 
-          tariff: tariffName || 'Не вказано' 
-        }),
+        body: JSON.stringify(requestData),
       });
       
       if (!response.ok) {
@@ -82,19 +97,28 @@ const ConnectModal: React.FC<ConnectModalProps> = ({
         </button>
         
         <h3 className="text-xl font-bold text-blue-900 mb-4">
-          {success ? 'Заявку відправлено!' : 'Замовити підключення'}
+          {success ? 'Заявку відправлено!' : isServiceRequest ? 'Замовлення послуги' : 'Замовити підключення'}
         </h3>
         
         {!success ? (
           <>
-            {tariffName && (
+            {tariffName && !isServiceRequest && (
               <p className="mb-4 text-gray-700">
                 Тариф: <span className="font-medium">{tariffName}</span>
               </p>
             )}
             
+            {serviceName && isServiceRequest && (
+              <p className="mb-4 text-gray-700">
+                Послуга: <span className="font-medium">{serviceName}</span>
+              </p>
+            )}
+            
             <p className="mb-4 text-gray-700">
-              Залиште свій номер телефону, і наш оператор зв'яжеться з вами для уточнення деталей підключення.
+              {isServiceRequest 
+                ? 'Залиште свій номер телефону, і наш спеціаліст зв\'яжеться з вами для уточнення деталей.'
+                : 'Залиште свій номер телефону, і наш оператор зв\'яжеться з вами для уточнення деталей підключення.'
+              }
             </p>
             
             <div className="mb-4">
@@ -142,7 +166,7 @@ const ConnectModal: React.FC<ConnectModalProps> = ({
                 </svg>
               </div>
               <p className="text-gray-700 mb-4">
-                Дякуємо за вашу заявку! Оператор зв'яжеться з вами найближчим часом для уточнення деталей.
+                Дякуємо за вашу заявку! {isServiceRequest ? 'Спеціаліст' : 'Оператор'} зв'яжеться з вами найближчим часом для уточнення деталей.
               </p>
             </div>
             
