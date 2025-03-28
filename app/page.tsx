@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ConnectModal from '../components/site/ConnectModal';
 
 interface Tariff {
   _id: string;
@@ -24,6 +25,8 @@ interface Contact {
 export default function HomePage() {
   const [tariffs, setTariffs] = useState<Tariff[]>([]);
   const [contacts, setContacts] = useState<Contact[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTariff, setSelectedTariff] = useState<string | null>(null);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -56,40 +59,52 @@ export default function HomePage() {
     }
   };
   
+  const handleOpenModal = (tariffName: string) => {
+    setSelectedTariff(tariffName);
+    setIsModalOpen(true);
+  };
+  
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    // Скидаємо вибраний тариф з невеликою затримкою,
+    // щоб уникнути видимого зникнення назви при закритті
+    setTimeout(() => setSelectedTariff(null), 300);
+  };
+  
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-  <div className="absolute inset-0 z-0">
-    <Image
-      src="/wheat-field.png"
-      alt="Wheat field"
-      fill
-      style={{ objectFit: 'cover' }}
-      priority
-    />
-    {/* Adding a dark overlay to improve text contrast */}
-    <div className="absolute inset-0   opacity-10  "></div>
-  </div>
-  
-  <div className="container mx-auto px-4 z-10 text-center">
-    <div className=" bg-opacity-100 p-8 rounded-lg backdrop-blur-sm inline-block">
-      <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-slide-down drop-shadow-lg">
-        Інтернет провайдер <span className="text-blue-400">Veles</span>
-      </h1>
-      <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto animate-fade-in drop-shadow-md">
-        Швидкісний та стабільний інтернет для вашого комфорту
-      </p>
-      <button 
-        onClick={scrollToTariffs}
-        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg animate-slide-up group"
-      >
-        Підключити
-        <span className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-      </button>
-    </div>
-  </div>
-</section>
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/wheat-field.png"
+            alt="Wheat field"
+            fill
+            style={{ objectFit: 'cover' }}
+            priority
+          />
+          {/* Adding a dark overlay to improve text contrast */}
+          <div className="absolute inset-0 opacity-10"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 z-10 text-center">
+          <div className="bg-opacity-100 p-8 rounded-lg backdrop-blur-sm inline-block">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-slide-down drop-shadow-lg">
+              Інтернет провайдер <span className="text-blue-400">Veles</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto animate-fade-in drop-shadow-md">
+              Швидкісний та стабільний інтернет для вашого комфорту
+            </p>
+            <button 
+              onClick={scrollToTariffs}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg animate-slide-up group"
+            >
+              Підключити
+              <span className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
       
       {/* Tariffs Section */}
       <section id="tariffs" className="section bg-gray-50">
@@ -131,12 +146,12 @@ export default function HomePage() {
                     </ul>
                   </div>
                   
-                  <a 
-                    href="/contacts" 
+                  <button 
+                    onClick={() => handleOpenModal(tariff.name)}
                     className="block w-full text-center py-2 px-4 bg-blue-600 text-white rounded-md transition-colors duration-300 hover:bg-blue-700"
                   >
                     Замовити підключення
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}
@@ -257,14 +272,21 @@ export default function HomePage() {
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Замовте підключення зараз та отримайте спеціальні умови для нових клієнтів
           </p>
-          <Link 
-            href="/contacts" 
+          <button 
+            onClick={() => handleOpenModal('Не вказано')}
             className="inline-block bg-white text-blue-700 px-8 py-3 rounded-md font-medium transition-all duration-300 hover:bg-blue-50 hover:shadow-lg transform hover:-translate-y-1"
           >
             Замовити підключення
-          </Link>
+          </button>
         </div>
       </section>
+      
+      {/* Модальне вікно для замовлення підключення */}
+      <ConnectModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+        tariffName={selectedTariff || undefined}
+      />
     </div>
   );
 }
