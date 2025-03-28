@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import TariffsList from './TariffsList';
+import TariffTabs from './TariffTabs';
 import ConnectModal from './ConnectModal';
 
 const HomeTariffsSection: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'home' | 'business'>('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTariff, setSelectedTariff] = useState<string | null>(null);
   
@@ -17,6 +19,10 @@ const HomeTariffsSection: React.FC = () => {
     setTimeout(() => setSelectedTariff(null), 300);
   };
   
+  const handleTabChange = (tab: 'home' | 'business') => {
+    setActiveTab(tab);
+  };
+  
   return (
     <section className="section bg-gray-50" id="tariffs">
       <div className="container mx-auto px-4">
@@ -25,11 +31,15 @@ const HomeTariffsSection: React.FC = () => {
           Оберіть оптимальний тарифний план для ваших потреб
         </p>
         
+        {/* Додаємо компонент табів */}
+        <TariffTabs activeTab={activeTab} onTabChange={handleTabChange} />
+        
         <div className="mt-12">
           <TariffsList 
             onSelectTariff={handleOpenModal}
             limit={3} // Показуємо тільки 3 тарифи на головній сторінці
             showPopular={true}
+            category={activeTab}
           />
         </div>
         

@@ -9,6 +9,7 @@ interface Tariff {
   speed: string;
   features: string[];
   isActive: boolean;
+  category: 'home' | 'business';
 }
 
 interface TariffsListProps {
@@ -16,6 +17,7 @@ interface TariffsListProps {
   className?: string;
   limit?: number;
   showPopular?: boolean;
+  category: 'home' | 'business';
 }
 
 const TariffsList: React.FC<TariffsListProps> = ({
@@ -23,6 +25,7 @@ const TariffsList: React.FC<TariffsListProps> = ({
   className = '',
   limit,
   showPopular = true,
+  category = 'home',
 }) => {
   const [tariffs, setTariffs] = useState<Tariff[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,7 +35,7 @@ const TariffsList: React.FC<TariffsListProps> = ({
     const fetchTariffs = async () => {
       setLoading(true);
       try {
-        const response = await fetch('/api/public/tariffs');
+        const response = await fetch(`/api/public/tariffs?category=${category}`);
         if (!response.ok) {
           throw new Error('Помилка завантаження тарифів');
         }
@@ -58,7 +61,7 @@ const TariffsList: React.FC<TariffsListProps> = ({
     };
 
     fetchTariffs();
-  }, [limit]);
+  }, [limit, category]);
 
   // Функція для визначення "популярного" тарифу
   // За замовчуванням вибираємо другий тариф, якщо є два або більше тарифів

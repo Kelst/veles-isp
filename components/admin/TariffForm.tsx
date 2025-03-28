@@ -11,6 +11,7 @@ interface TariffFormProps {
     speed: string;
     features: string[];
     isActive: boolean;
+    category?: 'home' | 'business';
   };
   onSubmit: (data: any) => void;
   onCancel: () => void;
@@ -27,12 +28,13 @@ const TariffForm: React.FC<TariffFormProps> = ({
     price: initialData?.price || 0,
     speed: initialData?.speed || '',
     features: initialData?.features || [''],
-    isActive: initialData?.isActive ?? true
+    isActive: initialData?.isActive ?? true,
+    category: initialData?.category || 'home'
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     
     if (type === 'checkbox') {
@@ -127,6 +129,21 @@ const TariffForm: React.FC<TariffFormProps> = ({
         {errors.description && (
           <p className="mt-1 text-sm text-red-600">{errors.description}</p>
         )}
+      </div>
+      
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Категорія тарифу
+        </label>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          className="block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300"
+        >
+          <option value="home">Для дому</option>
+          <option value="business">Для бізнесу</option>
+        </select>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

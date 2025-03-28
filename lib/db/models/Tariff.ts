@@ -8,6 +8,7 @@ export interface ITariff {
   speed: string;
   features: string[];
   isActive: boolean;
+  category: 'home' | 'business'; // Нове поле
   createdAt: Date;
   updatedAt: Date;
 }
@@ -20,6 +21,7 @@ const tariffSchema = new Schema<ITariff>(
     speed: { type: String, required: true },
     features: [{ type: String }],
     isActive: { type: Boolean, default: true },
+    category: { type: String, enum: ['home', 'business'], default: 'home' }, // Додаємо поле категорії
   },
   {
     timestamps: true,

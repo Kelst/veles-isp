@@ -1,47 +1,16 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import ConnectModal from '@/components/site/ConnectModal';
-
-interface Tariff {
-  _id: string;
-  name: string;
-  description: string;
-  price: number;
-  speed: string;
-  features: string[];
-  isActive: boolean;
-}
+import TariffsList from '@/components/site/TariffsList';
+import TariffTabs from '@/components/site/TariffTabs';
 
 export default function TariffsPage() {
-  const [tariffs, setTariffs] = useState<Tariff[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'home' | 'business'>('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTariff, setSelectedTariff] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchTariffs = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch('/api/public/tariffs');
-        if (!response.ok) {
-          throw new Error('Помилка завантаження тарифів');
-        }
-        const data = await response.json();
-        setTariffs(data.tariffs || []);
-        setError(null);
-      } catch (err) {
-        console.error('Помилка завантаження тарифів:', err);
-        setError('Не вдалося завантажити тарифи. Спробуйте пізніше.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTariffs();
-  }, []);
 
   const handleOpenModal = (tariffName: string) => {
     setSelectedTariff(tariffName);
@@ -54,6 +23,10 @@ export default function TariffsPage() {
     // щоб уникнути видимого зникнення назви при закритті
     setTimeout(() => setSelectedTariff(null), 300);
   };
+  
+  const handleTabChange = (tab: 'home' | 'business') => {
+    setActiveTab(tab);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -65,64 +38,15 @@ export default function TariffsPage() {
         </p>
       </div>
 
-      {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
-          <p className="text-red-700">{error}</p>
-        </div>
-      )}
+      {/* Додаємо компонент табів */}
+      <TariffTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
-      {loading ? (
-        <div className="flex justify-center items-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
-        </div>
-      ) : tariffs.length === 0 ? (
-        <div className="bg-gray-50 p-8 rounded-lg text-center">
-          <p className="text-gray-600">Наразі немає доступних тарифів для відображення.</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
-          {tariffs.map((tariff, index) => (
-            <div
-              key={tariff._id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="bg-blue-700 p-4 text-white">
-                <h3 className="text-xl font-bold">{tariff.name}</h3>
-              </div>
-
-              <div className="p-6">
-                <div className="text-center mb-6">
-                  <span className="text-3xl font-bold text-blue-900">{tariff.price}</span>
-                  <span className="text-gray-600"> грн/міс</span>
-                  <p className="text-blue-700 font-medium mt-2">{tariff.speed}</p>
-                </div>
-
-                <div className="mb-6">
-                  <p className="text-gray-600 mb-4">{tariff.description}</p>
-                  <ul className="space-y-2">
-                    {tariff.features.map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <button
-                  onClick={() => handleOpenModal(tariff.name)}
-                  className="block w-full text-center py-2 px-4 bg-blue-600 text-white rounded-md transition-colors duration-300 hover:bg-blue-700"
-                >
-                  Замовити підключення
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* Передаємо обрану категорію в TariffsList */}
+      <TariffsList 
+        onSelectTariff={handleOpenModal}
+        category={activeTab}
+        showPopular={true}
+      />
 
       {/* Секція переваг */}
       <div className="mt-16 mb-12">

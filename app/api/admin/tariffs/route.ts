@@ -43,6 +43,7 @@ export async function POST(request: NextRequest) {
       speed: data.speed,
       features: data.features || [],
       isActive: data.isActive !== undefined ? data.isActive : true,
+      category: data.category || 'home', // Додаємо категорію з даних форми або за замовчуванням
     });
     
     await newTariff.save();
