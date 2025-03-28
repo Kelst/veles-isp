@@ -1,9 +1,13 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import dbConnect from '@/lib/db/connection';
 import { User } from '@/lib/db/models/User';
+import { createAdminUser } from '@/lib/utils/auth';
 
-const handler = NextAuth({
+// Створення адміністратора при запуску, якщо його немає
+createAdminUser();
+
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -19,7 +23,10 @@ const handler = NextAuth({
         await dbConnect();
 
         try {
-          const user = await User.findOne({ username: credentials.username });
+          const user = await User.findOne({ 
+            username: credentials.username,
+            isActive: true 
+          });
           
           if (!user) {
             return null;
@@ -62,11 +69,15 @@ const handler = NextAuth({
   },
   pages: {
     signIn: '/admin/login',
+    error: '/admin/login',
   },
   session: {
     strategy: 'jwt',
+    maxAge: 24 * 60 * 60, // 24 години
   },
   secret: process.env.NEXTAUTH_SECRET || 'your_fallback_secret',
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
