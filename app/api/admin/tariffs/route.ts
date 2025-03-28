@@ -2,40 +2,24 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db/connection';
 import { Tariff } from '@/lib/db/models/Tariff';
 
-// GET /api/admin/tariffs/:id
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+// GET /api/admin/tariffs
+export async function GET(request: NextRequest) {
   try {
     // Перевірка авторизації (заглушка)
     // В реальному додатку потрібно додати перевірку прав
 
     await dbConnect();
-    const tariff = await Tariff.findById(params.id);
+    const tariffs = await Tariff.find().sort({ price: 1 });
     
-    if (!tariff) {
-      return NextResponse.json(
-        { error: 'Тариф не знайдено' },
-        { status: 404 }
-      );
-    }
-    
-    return NextResponse.json({ tariff }, { status: 200 });
+    return NextResponse.json({ tariffs }, { status: 200 });
   } catch (error) {
-    console.error('Помилка отримання тарифу:', error);
-    return NextResponse.json(
-      { error: 'Внутрішня помилка сервера' },
-      { status: 500 }
-    );
+    console.error('Помилка отримання тарифів:', error);
+    return NextResponse.json({ error: 'Внутрішня помилка сервера' }, { status: 500 });
   }
 }
 
-// PUT /api/admin/tariffs/:id
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+// POST /api/admin/tariffs
+export async function POST(request: NextRequest) {
   try {
     // Перевірка авторизації (заглушка)
     // В реальному додатку потрібно додати перевірку прав
@@ -52,68 +36,20 @@ export async function PUT(
     
     await dbConnect();
     
-    // Перевірка чи існує тариф
-    const existingTariff = await Tariff.findById(params.id);
-    if (!existingTariff) {
-      return NextResponse.json(
-        { error: 'Тариф не знайдено' },
-        { status: 404 }
-      );
-    }
+    const newTariff = new Tariff({
+      name: data.name,
+      description: data.description,
+      price: data.price,
+      speed: data.speed,
+      features: data.features || [],
+      isActive: data.isActive !== undefined ? data.isActive : true,
+    });
     
-    // Оновлення тарифу
-    const updatedTariff = await Tariff.findByIdAndUpdate(
-      params.id,
-      {
-        name: data.name,
-        description: data.description,
-        price: data.price,
-        speed: data.speed,
-        features: data.features || [],
-        isActive: data.isActive !== undefined ? data.isActive : true,
-      },
-      { new: true }
-    );
+    await newTariff.save();
     
-    return NextResponse.json({ tariff: updatedTariff }, { status: 200 });
+    return NextResponse.json({ tariff: newTariff }, { status: 201 });
   } catch (error) {
-    console.error('Помилка оновлення тарифу:', error);
-    return NextResponse.json(
-      { error: 'Внутрішня помилка сервера' },
-      { status: 500 }
-    );
-  }
-}
-
-// DELETE /api/admin/tariffs/:id
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    // Перевірка авторизації (заглушка)
-    // В реальному додатку потрібно додати перевірку прав
-    
-    await dbConnect();
-    
-    // Перевірка чи існує тариф
-    const existingTariff = await Tariff.findById(params.id);
-    if (!existingTariff) {
-      return NextResponse.json(
-        { error: 'Тариф не знайдено' },
-        { status: 404 }
-      );
-    }
-    
-    // Видалення тарифу
-    await Tariff.findByIdAndDelete(params.id);
-    
-    return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
-    console.error('Помилка видалення тарифу:', error);
-    return NextResponse.json(
-      { error: 'Внутрішня помилка сервера' },
-      { status: 500 }
-    );
+    console.error('Помилка створення тарифу:', error);
+    return NextResponse.json({ error: 'Внутрішня помилка сервера' }, { status: 500 });
   }
 }
