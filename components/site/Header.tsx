@@ -51,7 +51,7 @@ const Header = () => {
             { name: 'Тарифи', path: '/tariffs' },
             { name: 'Оплата', path: '/payments' },
             { name: 'Новини', path: '/news' },
-            { name: 'Контакти', path: '/contacts' },
+           
           ].map((item) => (
             <Link 
               key={item.path} 

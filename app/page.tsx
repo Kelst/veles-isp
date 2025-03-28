@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ConnectModal from '../components/site/ConnectModal';
+import HomeNewsSection from '@/components/site/HomeNewsSection';
+import HomeTariffsSection from '@/components/site/HomeTariffsSection';
 
 interface Tariff {
   _id: string;
@@ -107,57 +109,7 @@ export default function HomePage() {
       </section>
       
       {/* Tariffs Section */}
-      <section id="tariffs" className="section bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="section-title animate-fade-in">Наші тарифи</h2>
-          <p className="section-subtitle animate-fade-in">
-            Оберіть оптимальний тарифний план для ваших потреб
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            {tariffs.map((tariff, index) => (
-              <div 
-                key={tariff._id} 
-                className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="bg-blue-700 p-4 text-white">
-                  <h3 className="text-xl font-bold">{tariff.name}</h3>
-                </div>
-                
-                <div className="p-6">
-                  <div className="text-center mb-6">
-                    <span className="text-3xl font-bold text-blue-900">{tariff.price}</span>
-                    <span className="text-gray-600"> грн/міс</span>
-                    <p className="text-blue-700 font-medium mt-2">{tariff.speed}</p>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <p className="text-gray-600 mb-4">{tariff.description}</p>
-                    <ul className="space-y-2">
-                      {tariff.features.map((feature, i) => (
-                        <li key={i} className="flex items-start">
-                          <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                          </svg>
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <button 
-                    onClick={() => handleOpenModal(tariff.name)}
-                    className="block w-full text-center py-2 px-4 bg-blue-600 text-white rounded-md transition-colors duration-300 hover:bg-blue-700"
-                  >
-                    Замовити підключення
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+     <HomeTariffsSection/>
       
       {/* About Us Section */}
       <section className="section">
@@ -195,7 +147,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      
+      {/*News Section */}
+      <HomeNewsSection/>
       {/* Contact Section */}
       <section className="section bg-blue-50">
         <div className="container mx-auto px-4">
