@@ -107,21 +107,30 @@ export default function HomePage() {
         </div>
         
         <div className="container mx-auto px-4 z-10 text-center">
-          <div className="bg-opacity-100 p-8 rounded-lg backdrop-blur-sm inline-block">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-slide-down drop-shadow-lg">
-              Інтернет провайдер <span className="text-blue-400">Veles</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto animate-fade-in drop-shadow-md">
-              Швидкісний та стабільний інтернет для вашого комфорту
-            </p>
-            <button 
-              onClick={scrollToTariffs}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg animate-slide-up group"
-            >
-              Підключити
-              <span className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </button>
-          </div>
+        <div className="bg-opacity-100 p-8 rounded-lg backdrop-blur-sm inline-block">
+  <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-slide-down drop-shadow-lg">
+    Інтернет провайдер{" "}
+    <span className="inline-flex items-center">
+      <Image 
+        src="/logo.png" 
+        alt="Veles" 
+        width={150} 
+        height={40} 
+        className="drop-shadow-lg" 
+      />
+    </span>
+  </h1>
+  <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto animate-fade-in drop-shadow-md">
+    Швидкісний та стабільний інтернет для вашого комфорту
+  </p>
+  <button 
+    onClick={scrollToTariffs}
+    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg animate-slide-up group"
+  >
+    Підключити
+    <span className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+  </button>
+</div>
         </div>
       </section>
       

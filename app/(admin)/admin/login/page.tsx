@@ -73,7 +73,7 @@ export default function LoginPage() {
           <div className="flex justify-center mb-4">
             <div className="relative h-16 w-48">
               <Image 
-                src="/logo.jpg" 
+                src="/logo.png" 
                 alt="Veles ISP" 
                 fill 
                 style={{objectFit: "contain"}}

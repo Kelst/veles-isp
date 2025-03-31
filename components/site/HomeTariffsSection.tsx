@@ -37,7 +37,7 @@ const HomeTariffsSection: React.FC = () => {
         <div className="mt-12">
           <TariffsList 
             onSelectTariff={handleOpenModal}
-            limit={3} // Показуємо тільки 3 тарифи на головній сторінці
+            limit={4} // Показуємо тільки 3 тарифи на головній сторінці
             showPopular={true}
             category={activeTab}
           />
@@ -48,7 +48,7 @@ const HomeTariffsSection: React.FC = () => {
             href="/tariffs"
             className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
           >
-            Всі тарифи
+           Детальніше
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
             </svg>

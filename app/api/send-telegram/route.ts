@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { log } from 'node:console';
 
 // Константи для Telegram API
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN||'7718310748:AAEnoGgLnj8GOwik35hZF0Oqk4lTqmi_0pU';
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN||'7614086944:AAE2lQoKOitG6dxQAVXAe7fVbOK9mmPhjeA';
 
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID||'-4699665650';
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID||'-1002508731323';
 log(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
 
 export async function POST(request: NextRequest) {
