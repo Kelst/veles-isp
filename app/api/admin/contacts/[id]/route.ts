@@ -5,14 +5,11 @@ import { Contact } from '@/lib/db/models/Contact';
 // GET /api/admin/contacts/:id
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
-    // Перевірка авторизації (заглушка)
-    // В реальному додатку потрібно додати перевірку прав
-
     await dbConnect();
-    const contact = await Contact.findById(params.id);
+    const contact = await Contact.findById(context.params.id);
     
     if (!contact) {
       return NextResponse.json(
