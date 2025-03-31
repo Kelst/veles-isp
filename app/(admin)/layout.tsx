@@ -14,9 +14,9 @@ export default async function AdminLayout({
   // Якщо немає сесії і це не сторінка входу, перенаправляємо
   const isLoginPage = children.props?.childProp?.segment === 'login';
   
-  if (!session && !isLoginPage) {
-    redirect('/admin/login');
-  }
+//   if (!session && !isLoginPage) {
+//     redirect('/admin/login');
+//   }
 
   return <AdminLayoutClient>{children}</AdminLayoutClient>;
 }
