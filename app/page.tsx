@@ -1,11 +1,15 @@
+// app/page.tsx
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ConnectModal from '../components/site/ConnectModal';
 import HomeNewsSection from '@/components/site/HomeNewsSection';
 import HomeTariffsSection from '@/components/site/HomeTariffsSection';
+
+import SpecialOfferSection from '@/components/site/SpecialOfferSection';
+import FloatingPromoPopup from '@/components/site/FloatingPromoPopup';
 
 interface Tariff {
   _id: string;
@@ -29,6 +33,7 @@ export default function HomePage() {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTariff, setSelectedTariff] = useState<string | null>(null);
+  const promoSectionRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -61,6 +66,15 @@ export default function HomePage() {
     }
   };
   
+  const scrollToPromo = () => {
+    if (promoSectionRef.current) {
+      promoSectionRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  };
+  
   const handleOpenModal = (tariffName: string) => {
     setSelectedTariff(tariffName);
     setIsModalOpen(true);
@@ -75,6 +89,9 @@ export default function HomePage() {
   
   return (
     <div className="min-h-screen">
+      {/* Floating Promo Popup */}
+      <FloatingPromoPopup scrollToPromo={scrollToPromo} />
+      
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -108,8 +125,11 @@ export default function HomePage() {
         </div>
       </section>
       
+      {/* Special Offer Section */}
+      <SpecialOfferSection promoRef={promoSectionRef} />
+      
       {/* Tariffs Section */}
-     <HomeTariffsSection/>
+      <HomeTariffsSection/>
       
       {/* About Us Section */}
       <section className="section">
@@ -226,10 +246,10 @@ export default function HomePage() {
             Замовте підключення зараз та отримайте спеціальні умови для нових клієнтів
           </p>
           <button 
-            onClick={() => handleOpenModal('Не вказано')}
+            onClick={() => scrollToPromo()}
             className="inline-block bg-white text-blue-700 px-8 py-3 rounded-md font-medium transition-all duration-300 hover:bg-blue-50 hover:shadow-lg transform hover:-translate-y-1"
           >
-            Замовити підключення
+            Дізнатись про акцію
           </button>
         </div>
       </section>
