@@ -10,6 +10,7 @@ import HomeTariffsSection from '@/components/site/HomeTariffsSection';
 
 import SpecialOfferSection from '@/components/site/SpecialOfferSection';
 import FloatingPromoPopup from '@/components/site/FloatingPromoPopup';
+import FiberOpticAnimation from '@/components/site/FiberOpticAnimation';
 
 interface Tariff {
   _id: string;
@@ -138,6 +139,8 @@ export default function HomePage() {
       <SpecialOfferSection promoRef={promoSectionRef} />
       
       {/* Tariffs Section */}
+      <FiberOpticAnimation/>
+
       <HomeTariffsSection/>
       
       {/* About Us Section */}

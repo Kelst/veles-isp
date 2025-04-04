@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import CompanyTimeline from '@/components/site/CompanyTimeline';
 
 interface Contact {
   _id: string;
@@ -102,7 +103,12 @@ export default function AboutPage() {
         </div>
       </div>
       
-      <div className="bg-blue-50 p-8 rounded-lg shadow-md mb-12">
+    
+      
+      {/* Додаємо таймлайн історії компанії */}
+      <CompanyTimeline />
+      
+      <div className="bg-blue-50 p-8 rounded-lg shadow-md mb-12 mt-16">
         <h2 className="text-2xl font-semibold mb-6 text-blue-800">Наша історія</h2>
         <div className="space-y-4 text-gray-700">
          <p> Сьогодні "Велес" — це стабільно працююча компанія з професійною командою і сучасним технічним оснащенням.</p>
