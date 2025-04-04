@@ -39,11 +39,10 @@ const FiberOpticAnimation: React.FC = () => {
         </defs>
 
         {/* Небо */}
-        <rect width="800" height="200" fill="url(#skyGradient)" />
+        
 
         {/* Земля */}
-        <rect y="200" width="800" height="200" fill="url(#groundGradient)" />
-
+       
         {/* Інтернет-провайдер (будівля) */}
         <g>
           <rect x="50" y="100" width="150" height="200" rx="5" fill="url(#buildingGradient)" />
@@ -197,8 +196,8 @@ const FiberOpticAnimation: React.FC = () => {
 
         {/* Логотип компанії */}
         <g transform="translate(80, 30)">
-          <rect x="0" y="0" width="80" height="30" rx="5" fill="#2980B9" />
-          <text x="40" y="20" fontFamily="Arial" fontWeight="bold" fontSize="14" fill="white" textAnchor="middle">ВЕЛЕС</text>
+          <rect x="5" y="0" width="80" height="30" rx="5" fill="#2980B9" />
+          <text x="44" y="20" fontFamily="Arial" fontWeight="bold" fontSize="14" fill="white" textAnchor="middle">VELES</text>
         </g>
       </svg>
     </div>
