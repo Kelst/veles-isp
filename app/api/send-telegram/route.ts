@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { log } from 'node:console';
-
-// Константи для Telegram API
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN||'7614086944:AAE2lQoKOitG6dxQAVXAe7fVbOK9mmPhjeA';
-
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID||'-1002508731323';
-log(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
+import dbConnect from '@/lib/db/connection';
+import { Setting } from '@/lib/db/models/Setting';
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,11 +16,21 @@ export async function POST(request: NextRequest) {
       );
     }
     
+    // Підключаємось до бази даних
+    await dbConnect();
+    
+    // Отримуємо налаштування для Telegram з бази даних
+    const botTokenSetting = await Setting.findOne({ key: 'TELEGRAM_BOT_TOKEN' });
+    const chatIdSetting = await Setting.findOne({ key: 'TELEGRAM_CHAT_ID' });
+    
+    const TELEGRAM_BOT_TOKEN = botTokenSetting?.value || process.env.TELEGRAM_BOT_TOKEN;
+    const TELEGRAM_CHAT_ID = chatIdSetting?.value || process.env.TELEGRAM_CHAT_ID;
+    
     // Перевірка наявності конфігурації Telegram
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
       console.error('Відсутні налаштування Telegram бота');
       return NextResponse.json(
-        { error: 'Помилка конфігурації сервера' },
+        { error: 'Помилка конфігурації сервера. Налаштування Telegram не знайдено.' },
         { status: 500 }
       );
     }

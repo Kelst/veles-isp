@@ -72,6 +72,16 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
           </Link>
           <div className="border-t border-gray-700 my-4"></div>
           <Link 
+            href="/admin/setting" 
+            className={`block px-4 py-2 rounded transition ${
+              pathname === '/admin/settings' 
+                ? 'bg-blue-600 text-white' 
+                : 'hover:bg-gray-700'
+            }`}
+          >
+            Налаштування
+          </Link>
+          <Link 
             href="/" 
             className="block px-4 py-2 rounded hover:bg-gray-700 transition"
           >
