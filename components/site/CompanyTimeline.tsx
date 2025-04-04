@@ -70,29 +70,27 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   position = 'left' 
 }) => {
   const Icon = icon;
-  const isLeft = position === 'left';
   
   return (
-    <div className={`flex w-full items-center justify-center mb-12 ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}>
+    <div className="flex flex-col md:flex-row w-full items-center justify-center mb-8 md:mb-12 space-y-4 md:space-y-0">
       <div 
-        className={`w-5/12 ${isVisible ? (isLeft ? 'animate-slide-right' : 'animate-slide-left') : 'opacity-0'}`}
+        className={`w-full md:w-5/12 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
         style={{
           transition: 'all 0.8s ease-out',
-          transform: isVisible ? 'translateX(0)' : (isLeft ? 'translateX(-100px)' : 'translateX(100px)'),
-          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? 'translateX(0)' : 'translateX(-50px)',
         }}
       >
-        <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-blue-500 hover:shadow-xl transition-all duration-300 h-full">
-          <div className="flex justify-between items-start mb-2">
-            <h3 className="font-bold text-lg text-blue-800">{title}</h3>
-            <span className="text-sm font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded-full">{year}</span>
+        <div className="bg-white p-4 md:p-6 rounded-lg shadow-lg border-l-4 border-blue-500 hover:shadow-xl transition-all duration-300 h-full">
+          <div className="flex flex-col md:flex-row justify-between items-start mb-2">
+            <h3 className="font-bold text-base md:text-lg text-blue-800 mb-2 md:mb-0">{title}</h3>
+            <span className="text-xs md:text-sm font-semibold px-2 py-1 bg-blue-100 text-blue-800 rounded-full">{year}</span>
           </div>
-          <p className="text-gray-600">{description}</p>
+          <p className="text-xs md:text-sm text-gray-600">{description}</p>
         </div>
       </div>
       
       <div 
-        className={`w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mx-4 z-10 ${isVisible ? 'animate-pop' : 'opacity-0'}`}
+        className={`w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-500 flex items-center justify-center mx-4 z-10 ${isVisible ? 'animate-pop' : 'opacity-0'}`}
         style={{
           transition: 'all 0.5s ease-out',
           transitionDelay: '0.3s',
@@ -100,10 +98,10 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
           opacity: isVisible ? 1 : 0,
         }}
       >
-        <Icon className="w-5 h-5 text-white" />
+        <Icon className="w-4 h-4 md:w-5 md:h-5 text-white" />
       </div>
       
-      <div className="w-5/12"></div>
+      <div className="hidden md:block w-5/12"></div>
     </div>
   );
 };
@@ -148,80 +146,71 @@ const CompanyTimeline: React.FC = () => {
       year: 2004,
       title: "Заснування компанії",
       description: "Інтернет-провайдер 'Велес' починає свою роботу на ринку телекомунікаційних послуг України.",
-      icon: Star,
-      position: 'left' as const
+      icon: Star
     },
     {
       year: 2007,
       title: "Перший великий проект",
       description: "Забезпечення інтернетом багатоквартирних будинків у центральних районах м. Чернівці.",
-      icon: Network,
-      position: 'right' as const
+      icon: Network
     },
     {
       year: 2010,
       title: "Розширення зони покриття",
       description: "Вихід на ринок приватного сектору та початок активного розширення мережі по всьому місту.",
-      icon: Users,
-      position: 'left' as const
+      icon: Users
     },
     {
       year: 2013,
       title: "Впровадження оптоволокна",
       description: "Початок прокладання оптоволоконних ліній зв'язку, що дозволило суттєво підвищити швидкість інтернету.",
-      icon: Zap,
-      position: 'right' as const
+      icon: Zap
     },
     {
       year: 2015,
       title: "Запуск технічної підтримки 24/7",
       description: "Створення цілодобової служби підтримки клієнтів для оперативного вирішення технічних питань.",
-      icon: Clock,
-      position: 'left' as const
+      icon: Clock
     },
     {
       year: 2018,
       title: "Подолання труднощів",
       description: "Успішне подолання технічних та економічних викликів, модернізація обладнання та інфраструктури.",
-      icon: ZapOff,
-      position: 'right' as const
+      icon: ZapOff
     },
     {
       year: 2020,
       title: "Гігабітні швидкості",
       description: "Запуск тарифів з гігабітними швидкостями для приватних та бізнес-клієнтів по всьому місту.",
-      icon: Network,
-      position: 'left' as const
+      icon: Network
     },
     {
-      year: 2023,
-      title: "Визнання якості",
-      description: "Отримання нагороди 'Найкращий інтернет-провайдер Чернівецької області' за результатами опитування клієнтів.",
-      icon: Award,
-      position: 'right' as const
+      year: 2024,
+      title: "Енергетична автономність",
+      description: "Забезпечення вузлів безперебійним живленням",
+      icon: Award
     },
     {
       year: 2025,
       title: "Сьогодення і плани",
       description: "Продовження модернізації мережі та запуск нових сервісів для наших клієнтів.",
-      icon: Star,
-      position: 'left' as const
+      icon: Star
     }
   ];
 
   return (
-    <div className="bg-blue-50 py-16 px-4">
+    <div className="bg-blue-50 py-12 md:py-16 px-4">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-4">Історія розвитку компанії Велес</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-2xl md:text-3xl font-bold text-blue-900 mb-4">Історія розвитку компанії Велес</h2>
+          <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
             Пройдіть з нами шлях від початку до сьогодення і дізнайтеся, як ми стали лідером на ринку інтернет-послуг у Чернівцях та області.
           </p>
         </div>
         
         <div className="relative">
           {/* Вертикальна лінія */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-200"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-200 hidden md:block"></div>
           
           {/* Елементи таймлайну */}
           {timelineData.map((item, index) => (
@@ -231,15 +220,15 @@ const CompanyTimeline: React.FC = () => {
                 title={item.title}
                 description={item.description}
                 icon={item.icon}
-                position={item.position}
+                position={index % 2 === 0 ? 'left' : 'right'}
                 isVisible={visibleItems[index]}
               />
             </div>
           ))}
         </div>
         
-        <div className="text-center mt-12">
-          <div className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-colors cursor-pointer">
+        <div className="text-center mt-8 md:mt-12">
+          <div className="inline-block bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-colors cursor-pointer text-sm md:text-base">
             Станьте частиною нашої історії - підключіться до Велес
           </div>
         </div>

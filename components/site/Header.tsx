@@ -1,7 +1,8 @@
-'use client';
+"use client"
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -9,11 +10,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -21,6 +18,16 @@ const Header = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const menuItems = [
+    { name: 'Про нас', path: '/about', icon: 'Info' },
+    { name: 'Послуги', path: '/services', icon: 'Settings' },
+    { name: 'Тарифи', path: '/tariffs', icon: 'Tag' },
+    { name: 'Оплата', path: '/payments', icon: 'CreditCard' },
+    { name: 'Новини', path: '/news', icon: 'Newspaper' },
+    { name: 'Абоненту', path: '/abonent', icon: 'User' },
+    { name: 'Поради', path: '/optimization', icon: 'HelpCircle' }
+  ];
 
   return (
     <header 
@@ -31,6 +38,7 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
+        {/* Logo */}
         <Link href="/" className="flex items-center">
           <div className="relative h-12 w-36">
             <Image 
@@ -45,54 +53,28 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-1">
-          {[
-            { name: 'Про нас', path: '/about' },
-            { name: 'Послуги', path: '/services' },
-            { name: 'Тарифи', path: '/tariffs' },
-            { name: 'Оплата', path: '/payments' },
-            { name: 'Новини', path: '/news' },
-            { name: 'Абоненту', path: '/abonent' },
-           
-          ].map((item) => (
-            <Link 
-              key={item.path} 
-              href={item.path}
-              className="relative px-4 py-2 text-blue-900 font-medium hover:text-blue-600 transition-colors duration-300 group"
-            >
-              {item.name}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-          ))}
+          {menuItems.map((item) => {
+            const IconComponent = require('lucide-react')[item.icon];
+            return (
+              <Link 
+                key={item.path} 
+                href={item.path}
+                className="relative px-4 py-2 text-blue-900 font-medium hover:text-blue-600 transition-colors duration-300 group flex items-center"
+              >
+                <IconComponent className="mr-2 w-5 h-5 text-blue-500" />
+                {item.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            );
+          })}
         </nav>
         
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <button 
           className="md:hidden text-blue-900 flex items-center"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor" 
-            className="w-6 h-6"
-          >
-            {isMobileMenuOpen ? (
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M6 18L18 6M6 6l12 12" 
-              />
-            ) : (
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M4 6h16M4 12h16M4 18h16" 
-              />
-            )}
-          </svg>
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
       
@@ -103,23 +85,20 @@ const Header = () => {
         }`}
       >
         <nav className="container mx-auto px-4 flex flex-col space-y-3">
-          {[
-            { name: 'Про нас', path: '/about' },
-            { name: 'Послуги', path: '/services' },
-            { name: 'Тарифи', path: '/tariffs' },
-            { name: 'Оплата', path: '/payments' },
-            { name: 'Новини', path: '/news' },
-            { name: 'Контакти', path: '/contacts' },
-          ].map((item) => (
-            <Link 
-              key={item.path} 
-              href={item.path}
-              className="text-blue-900 font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {item.name}
-            </Link>
-          ))}
+          {menuItems.map((item) => {
+            const IconComponent = require('lucide-react')[item.icon];
+            return (
+              <Link 
+                key={item.path} 
+                href={item.path}
+                className="text-blue-900 font-medium py-2 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200 flex items-center"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <IconComponent className="mr-3 w-5 h-5 text-blue-500" />
+                {item.name}
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </header>
