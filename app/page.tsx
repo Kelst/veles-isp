@@ -204,7 +204,7 @@ export default function HomePage() {
             </div>
             <div className="lg:w-1/2 relative h-64 md:h-96 w-full">
               <Image
-                src="/networking.jpeg"
+                src="/networking.png"
                 alt="Networking equipment"
                 fill
                 style={{ objectFit: 'cover', borderRadius: '0.5rem' }}
