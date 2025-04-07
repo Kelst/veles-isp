@@ -99,26 +99,26 @@ export default function TariffsPage() {
 
       {/* Часті запитання */}
       <div className="mt-16 mb-10">
-        <h2 className="text-2xl font-bold mb-8 text-center text-blue-900">Часті запитання</h2>
-        <div className="max-w-3xl mx-auto space-y-4">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold mb-2 text-blue-900">Як підключити інтернет?</h3>
-            <p className="text-gray-600">Для підключення послуг інтернету виберіть тариф і натисніть кнопку "Замовити підключення". Наш оператор зв'яжеться з вами для уточнення деталей і призначення дати підключення.</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold mb-2 text-blue-900">Які способи оплати доступні?</h3>
-            <p className="text-gray-600">Ми пропонуємо різні способи оплати: через термінали самообслуговування, онлайн-платежі, банківські перекази та інші. Детальніше про способи оплати можна дізнатися у розділі "Оплата".</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold mb-2 text-blue-900">Чи є плата за підключення?</h3>
-            <p className="text-gray-600">Підключення для нових клієнтів безкоштовне при умові внесення передоплати за перший місяць користування послугами. Детальні умови уточнюйте у нашого оператора.</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold mb-2 text-blue-900">Скільки коштує статична IP-адреса?</h3>
-            <p className="text-gray-600">Вартість послуги "Статична IP-адреса" складає 50 грн/місяць додатково до вашого основного тарифу. Замовити послугу можна при підключенні або звернувшись до служби підтримки.</p>
-          </div>
+      <h2 className="text-2xl font-bold mb-8 text-center text-blue-900">Часті запитання</h2>
+      <div className="max-w-3xl mx-auto space-y-4">
+        <div className="bg-white p-6 rounded-lg shadow-md hover:scale-[1.02] transition-transform duration-300 ease-in-out">
+          <h3 className="text-lg font-semibold mb-2 text-blue-900">Як підключити інтернет?</h3>
+          <p className="text-gray-600">Для підключення послуг інтернету виберіть тариф і натисніть кнопку "Замовити підключення". Наш оператор зв'яжеться з вами для уточнення деталей і призначення дати підключення.</p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-md hover:scale-[1.02] transition-transform duration-300 ease-in-out">
+          <h3 className="text-lg font-semibold mb-2 text-blue-900">Які способи оплати доступні?</h3>
+          <p className="text-gray-600">Ми пропонуємо різні способи оплати: через термінали самообслуговування, онлайн-платежі, банківські перекази та інші. Детальніше про способи оплати можна дізнатися у розділі "Оплата".</p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-md hover:scale-[1.02] transition-transform duration-300 ease-in-out">
+          <h3 className="text-lg font-semibold mb-2 text-blue-900">Чи є плата за підключення?</h3>
+          <p className="text-gray-600">Підключення для нових клієнтів безкоштовне при умові внесення передоплати за перший місяць користування послугами. Детальні умови уточнюйте у нашого оператора.</p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-md hover:scale-[1.02] transition-transform duration-300 ease-in-out">
+          <h3 className="text-lg font-semibold mb-2 text-blue-900">Скільки коштує статична IP-адреса?</h3>
+          <p className="text-gray-600">Вартість послуги "Статична IP-адреса" складає 50 грн/місяць додатково до вашого основного тарифу. Замовити послугу можна при підключенні або звернувшись до служби підтримки.</p>
         </div>
       </div>
+    </div>
 
       {/* Call to Action */}
       <div className="mt-16 bg-blue-700 text-white p-8 rounded-lg shadow-lg">
