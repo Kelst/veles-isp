@@ -84,7 +84,11 @@ const ConnectModal: React.FC<ConnectModalProps> = ({
   if (!isOpen) return null;
   
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center" style={{
+      backgroundImage: 'url("/wheat-field.png")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }}>
       <div className="relative bg-white rounded-lg p-6 w-full max-w-md mx-4 shadow-xl animate-fade-in">
         <button 
           onClick={onClose} 
