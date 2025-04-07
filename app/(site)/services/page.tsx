@@ -2,7 +2,16 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-
+import { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'Послуги | Veles ISP Чернівці',
+  description: 'Додаткові послуги інтернет-провайдера Veles - налаштування обладнання, встановлення мережевого устаткування, прокладка кабелів та технічне обслуговування.',
+  keywords: ['послуги інтернет провайдера', 'налаштування роутера', 'прокладка мережевих кабелів', 'статична IP'],
+  openGraph: {
+    title: 'Послуги | Veles ISP Чернівці',
+    description: 'Додаткові послуги інтернет-провайдера Veles - налаштування обладнання, встановлення мережевого устаткування, прокладка кабелів та технічне обслуговування.'
+  }
+};
 export default function ServicesPage() {
   const [phone, setPhone] = useState('');
   const [service, setService] = useState('');

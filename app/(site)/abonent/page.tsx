@@ -3,7 +3,17 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: 'Інформація для абонентів | Veles ISP',
+  description: 'Корисна інформація для абонентів інтернет-провайдера Veles. Особистий кабінет, Telegram-бот, управління послугами та часті запитання.',
+  keywords: ['особистий кабінет', 'інформація для абонентів', 'Telegram бот інтернет', 'FAQ Veles'],
+  openGraph: {
+    title: 'Інформація для абонентів | Veles ISP',
+    description: 'Корисна інформація для абонентів інтернет-провайдера Veles. Особистий кабінет, Telegram-бот, управління послугами та часті запитання.'
+  }
+};
 export default function AbonentPage() {
   return (
     <div className="container mx-auto px-4 py-8">

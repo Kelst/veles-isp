@@ -3,7 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import CompanyTimeline from '@/components/site/CompanyTimeline';
-
+import { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'Про компанію Veles ISP | Інтернет-провайдер Чернівці',
+  description: 'Veles - сучасна телекомунікаційна компанія з 2004 року. Надійний доступ до швидкісного інтернету для жителів та бізнесу Чернівців та області.',
+  keywords: ['Veles ISP', 'історія компанії', 'інтернет-провайдер Чернівці', 'про провайдера'],
+  openGraph: {
+    title: 'Про компанію Veles ISP | Інтернет-провайдер Чернівці',
+    description: 'Veles - сучасна телекомунікаційна компанія з 2004 року. Надійний доступ до швидкісного інтернету для жителів та бізнесу Чернівців та області.'
+  }
+};
 interface Contact {
   _id: string;
   type: 'address' | 'phone' | 'email' | 'social';

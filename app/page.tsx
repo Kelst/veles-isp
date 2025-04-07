@@ -7,11 +7,21 @@ import Link from 'next/link';
 import ConnectModal from '../components/site/ConnectModal';
 import HomeNewsSection from '@/components/site/HomeNewsSection';
 import HomeTariffsSection from '@/components/site/HomeTariffsSection';
+import { Metadata } from 'next';
 
 import SpecialOfferSection from '@/components/site/SpecialOfferSection';
 import FloatingPromoPopup from '@/components/site/FloatingPromoPopup';
 import FiberOpticAnimation from '@/components/site/FiberOpticAnimation';
-
+//SEO
+export const metadata: Metadata = {
+  title: 'Veles ISP - Надійний інтернет-провайдер у Чернівцях',
+  description: 'Підключення швидкісного інтернету до 1 Гбіт/с в Чернівцях та області. Вигідні тарифи, безкоштовне підключення, цілодобова підтримка.',
+  keywords: ['інтернет Чернівці', 'підключити інтернет', 'швидкісний інтернет', 'оптоволокно Чернівці'],
+  openGraph: {
+    title: 'Veles ISP - Надійний інтернет-провайдер у Чернівцях',
+    description: 'Підключення швидкісного інтернету до 1 Гбіт/с в Чернівцях та області. Вигідні тарифи, безкоштовне підключення, цілодобова підтримка.'
+  }
+};
 interface Tariff {
   _id: string;
   name: string;

@@ -3,7 +3,17 @@
 import React, { useState } from 'react';
 import Link from 'next/link'; // Keep Link if you plan to use internal navigation later
 import Image from 'next/image';
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: 'Оптимізація використання інтернету | Veles ISP',
+  description: 'Корисні рекомендації для оптимізації використання інтернету. Налаштування Wi-Fi, розташування роутера, безпека та оптимізація трафіку.',
+  keywords: ['оптимізація інтернету', 'налаштування Wi-Fi', 'розташування роутера', 'мережева безпека'],
+  openGraph: {
+    title: 'Оптимізація використання інтернету | Veles ISP',
+    description: 'Корисні рекомендації для оптимізації використання інтернету. Налаштування Wi-Fi, розташування роутера, безпека та оптимізація трафіку.'
+  }
+};
 const OptimizationPage = () => {
   // State to track the open section
   const [openSection, setOpenSection] = useState<string | null>('router');

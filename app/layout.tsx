@@ -9,42 +9,38 @@ const roboto = Roboto({
   variable: '--font-roboto'
 })
 export const metadata: Metadata = {
-  metadataBase: new URL('https://veles-net.com'), // Замініть на ваш домен
+  metadataBase: new URL('https://veles-net.com'), // Make sure this is your actual domain
   title: {
     default: 'Veles ISP - Інтернет-провайдер у Чернівцях',
     template: '%s | Veles ISP'
   },
-  description: 'Високошвидкісний інтернет для дому та бізнесу в Чернівцях та області. Stable, reliable, and fast internet connection.',
+  description: 'Високошвидкісний інтернет для дому та бізнесу в Чернівцях та області. Швидке підключення, стабільне з\'єднання та професійна підтримка 24/7.',
   keywords: [
-    'інтернет', 
-    'провайдер', 
-    'чернівці', 
-    'інтернет-послуги', 
-    'високошвидкісний інтернет', 
+    'інтернет провайдер', 
+    'Чернівці', 
+    'швидкісний інтернет', 
+    'оптоволокно',
     'домашній інтернет', 
-    'інтернет для бізнесу'
+    'інтернет для бізнесу',
+    'підключення інтернету',
+    'Veles ISP',
+    'зарезервоване живлення'
   ],
   openGraph: {
     type: 'website',
     locale: 'uk_UA',
-    url: 'https://veles.cv.ua',
+    url: 'https://veles.cv.ua/',
     siteName: 'Veles ISP',
     title: 'Veles ISP - Інтернет-провайдер у Чернівцях',
-    description: 'Високошвидкісний інтернет для дому та бізнесу в Чернівцях та області.',
+    description: 'Високошвидкісний інтернет для дому та бізнесу в Чернівцях та області. Швидке підключення, стабільне з\'єднання та професійна підтримка 24/7.',
     images: [
       {
-        url: '/og-image.png', // створіть цей файл у public
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Veles ISP - Інтернет провайдер'
       }
     ]
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Veles ISP - Інтернет-провайдер у Чернівцях',
-    description: 'Високошвидкісний інтернет для дому та бізнесу в Чернівцях та області.',
-    images: ['/og-image.png']
   },
   robots: {
     index: true,
@@ -58,13 +54,12 @@ export const metadata: Metadata = {
     }
   },
   verification: {
-    google: 'your-google-site-verification-code', // Додайте код верифікації Google Search Console
-    // yandex: 'your-yandex-verification-code',
+    google: 'your-google-site-verification-code', // Add your actual verification code
   },
   alternates: {
-    canonical: 'https://veles-net.com',
+    canonical: 'https://veles.cv.ua/',
   },
-};
+}
 
 export default function RootLayout({
   children,

@@ -7,7 +7,16 @@ import ConnectModal from '@/components/site/ConnectModal';
 import TariffsList from '@/components/site/TariffsList';
 import TariffTabs from '@/components/site/TariffTabs';
 import TariffRecommendation from '@/components/site/TariffRecommendation';
-
+import { Metadata } from 'next';
+export const metadata: Metadata = {
+  title: 'Тарифи на інтернет | Veles ISP',
+  description: 'Вигідні тарифи на швидкісний інтернет до 1 Гбіт/с для дому та бізнесу. Безлімітний трафік, стабільне з\'єднання, підтримка 24/7.',
+  keywords: ['тарифи інтернет', 'вартість інтернету Чернівці', 'інтернет для дому', 'інтернет для бізнесу'],
+  openGraph: {
+    title: 'Тарифи на інтернет | Veles ISP',
+    description: 'Вигідні тарифи на швидкісний інтернет до 1 Гбіт/с для дому та бізнесу. Безлімітний трафік, стабільне з\'єднання, підтримка 24/7.'
+  }
+};
 export default function TariffsPage() {
   const [activeTab, setActiveTab] = useState<'home' | 'business'>('home');
   const [isModalOpen, setIsModalOpen] = useState(false);

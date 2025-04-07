@@ -4,6 +4,18 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Оплата послуг | Veles ISP',
+  description: 'Зручні способи оплати послуг інтернет-провайдера Veles. Оплата через Приват24, термінали самообслуговування та інші варіанти.',
+  keywords: ['оплата інтернету', 'поповнити рахунок', 'способи оплати інтернету', 'оплата Veles'],
+  openGraph: {
+    title: 'Оплата послуг | Veles ISP',
+    description: 'Зручні способи оплати послуг інтернет-провайдера Veles. Оплата через Приват24, термінали самообслуговування та інші варіанти.'
+  }
+};
+
 export default function PaymentsPage() {
   return (
     <div className="container mx-auto px-4 py-8">
