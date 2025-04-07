@@ -6,11 +6,13 @@ import Image from 'next/image';
 import ConnectModal from '@/components/site/ConnectModal';
 import TariffsList from '@/components/site/TariffsList';
 import TariffTabs from '@/components/site/TariffTabs';
+import TariffRecommendation from '@/components/site/TariffRecommendation';
 
 export default function TariffsPage() {
   const [activeTab, setActiveTab] = useState<'home' | 'business'>('home');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTariff, setSelectedTariff] = useState<string | null>(null);
+  const [showRecommendation, setShowRecommendation] = useState(false);
 
   const handleOpenModal = (tariffName: string) => {
     setSelectedTariff(tariffName);
@@ -28,6 +30,10 @@ export default function TariffsPage() {
     setActiveTab(tab);
   };
 
+  const toggleRecommendation = () => {
+    setShowRecommendation(!showRecommendation);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-10">
@@ -38,15 +44,46 @@ export default function TariffsPage() {
         </p>
       </div>
 
-      {/* Додаємо компонент табів */}
-      <TariffTabs activeTab={activeTab} onTabChange={handleTabChange} />
+      {/* Кнопка для перемикання між простим вибором і рекомендацією */}
+      <div className="flex justify-center mb-8">
+        <button
+          onClick={toggleRecommendation}
+          className="flex items-center bg-blue-100 text-blue-800 font-semibold py-3 px-6 rounded-full hover:bg-blue-200 transition-colors"
+        >
+          {showRecommendation ? (
+            <>
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7"></path>
+              </svg>
+              Показати всі тарифи
+            </>
+          ) : (
+            <>
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Підібрати оптимальний тариф
+            </>
+          )}
+        </button>
+      </div>
 
-      {/* Передаємо обрану категорію в TariffsList */}
-      <TariffsList 
-        onSelectTariff={handleOpenModal}
-        category={activeTab}
-        showPopular={true}
-      />
+      {/* Відображаємо рекомендацію або звичайний список тарифів */}
+      {showRecommendation ? (
+        <TariffRecommendation onSelectTariff={handleOpenModal} />
+      ) : (
+        <>
+          {/* Додаємо компонент табів */}
+          <TariffTabs activeTab={activeTab} onTabChange={handleTabChange} />
+
+          {/* Передаємо обрану категорію в TariffsList */}
+          <TariffsList 
+            onSelectTariff={handleOpenModal}
+            category={activeTab}
+            showPopular={true}
+          />
+        </>
+      )}
 
       {/* Секція переваг */}
       <div className="mt-16 mb-12">

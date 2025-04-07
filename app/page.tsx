@@ -142,7 +142,6 @@ export default function HomePage() {
       <FiberOpticAnimation/>
 
       <HomeTariffsSection/>
-      
       {/* About Us Section */}
       <section className="section">
         <div className="container mx-auto px-4">
