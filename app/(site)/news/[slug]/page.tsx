@@ -1,49 +1,9 @@
 'use client';
-
 import React, { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatDate } from '@/lib/utils/helpers';
-import { Metadata } from 'next';
 
-// Add this function to generate dynamic metadata
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  // Fetch the news article data
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'https://veles-net.com'}/api/public/news?slug=${params.slug}`);
-  
-  if (!response.ok) {
-    return {
-      title: 'Новина не знайдена | Veles ISP',
-      description: 'Запитана новина не знайдена на сайті інтернет-провайдера Veles.',
-    };
-  }
-  
-  const data = await response.json();
-  const news = data.news;
-  
-  if (!news) {
-    return {
-      title: 'Новина не знайдена | Veles ISP',
-      description: 'Запитана новина не знайдена на сайті інтернет-провайдера Veles.',
-    };
-  }
-  
-  // Create excerpt from content for description (first 160 characters)
-  const excerpt = news.content.substring(0, 157) + '...';
-  
-  return {
-    title: `${news.title} | Новини Veles ISP`,
-    description: excerpt,
-    openGraph: {
-      title: news.title,
-      description: excerpt,
-      type: 'article',
-      publishedTime: news.createdAt,
-      modifiedTime: news.updatedAt,
-      images: news.image ? [{ url: news.image }] : undefined,
-    },
-  };
-}
 interface News {
   _id: string;
   title: string;

@@ -14,7 +14,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/contacts',
     '/abonent',
     '/optimization',
-    '/news',
   ].map(path => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date(),
@@ -22,19 +21,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: path === '' ? 1 : 0.8,
   }));
   
-  // Fetch dynamic news pages
-  const newsResponse = await fetch(`${baseUrl}/api/public/news`);
-  let newsPages: MetadataRoute.Sitemap = [];
   
-  if (newsResponse.ok) {
-    const newsData = await newsResponse.json();
-    newsPages = (newsData.news || []).map((news: any) => ({
-      url: `${baseUrl}/news/${news.slug}`,
-      lastModified: new Date(news.updatedAt),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    }));
-  }
   
-  return [...staticPages, ...newsPages];
+  
+  return [...staticPages];
 }
