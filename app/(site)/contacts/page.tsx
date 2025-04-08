@@ -3,16 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Metadata } from 'next';
-export const metadata: Metadata = {
-  title: 'Контакти Veles ISP | Звʼязатися з нами',
-  description: 'Контактна інформація інтернет-провайдера Veles. Адреса, телефони, електронна пошта. Технічна підтримка 24/7. Зворотній зв\'язок.',
-  keywords: ['контакти Veles', 'технічна підтримка', 'телефон провайдера', 'адреса офісу інтернет провайдера'],
-  openGraph: {
-    title: 'Контакти Veles ISP | Звʼязатися з нами',
-    description: 'Контактна інформація інтернет-провайдера Veles. Адреса, телефони, електронна пошта. Технічна підтримка 24/7. Зворотній зв\'язок.'
-  }
-};
+
 interface Contact {
   _id: string;
   type: 'address' | 'phone' | 'email' | 'social';
