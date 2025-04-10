@@ -11,6 +11,8 @@ import HomeTariffsSection from '@/components/site/HomeTariffsSection';
 import SpecialOfferSection from '@/components/site/SpecialOfferSection';
 import FloatingPromoPopup from '@/components/site/FloatingPromoPopup';
 import FiberOpticAnimation from '@/components/site/FiberOpticAnimation';
+import Footer from '@/components/site/Footer';
+import Header from '@/components/site/Header';
 //SEO
 
 interface Tariff {
@@ -91,6 +93,7 @@ export default function HomePage() {
   
   return (
     <div className="min-h-screen">
+      
       {/* Floating Promo Popup */}
       <FloatingPromoPopup scrollToPromo={scrollToPromo} />
       
@@ -300,7 +303,7 @@ export default function HomePage() {
           </button>
         </div>
       </section>
-      
+      <Footer/>
       {/* Модальне вікно для замовлення підключення */}
       <ConnectModal 
         isOpen={isModalOpen} 

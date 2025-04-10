@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Clock, Award, Network, Users, ZapOff, Star, Zap } from 'lucide-react';
+import Link from 'next/link';
 
 // CSS для анімацій (додайте це в глобальний CSS файл)
 const animationStyles = `
@@ -227,11 +228,15 @@ const CompanyTimeline: React.FC = () => {
           ))}
         </div>
         
+        <Link href="/tariffs" >
+                 
+               
         <div className="text-center mt-8 md:mt-12">
           <div className="inline-block bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-colors cursor-pointer text-sm md:text-base">
             Станьте частиною нашої історії - підключіться до Велес
           </div>
         </div>
+         </Link>
       </div>
     </div>
   );

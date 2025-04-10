@@ -80,9 +80,9 @@ export default function AbonentPage() {
           <div className="bg-blue-50 rounded-lg p-6 transition-all duration-300 hover:shadow-md">
             <h2 className="text-xl font-semibold text-blue-800 mb-4">Telegram-бот для управління аккаунтом</h2>
             <div className="flex justify-center mb-4">
-              <div className="relative h-48 w-48 rounded-lg overflow-hidden">
+              <div className="relative h-68 w-68 rounded-lg overflow-hidden">
                 <Image 
-                  src="/telegram-bot.png" 
+                  src="/telegram.png" 
                   alt="QR-код Telegram бота"
                   fill
                   style={{ objectFit: "contain" }}
@@ -126,7 +126,7 @@ export default function AbonentPage() {
               </li>
             </ul>
             <a 
-              href="https://t.me/Veles_Network_Bot"
+              href="https://t.me/VelesISP_bot"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
