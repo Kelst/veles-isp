@@ -1,12 +1,24 @@
 import type { Metadata } from "next";
-import { Inter,Roboto } from 'next/font/google';
 import "./globals.css";
+import { Inter, Roboto, Montserrat, Open_Sans, Ubuntu, Nunito, Titillium_Web } from 'next/font/google';
 
-const roboto = Roboto({
-  weight: ['400', '500', '700'],
+// const roboto = Roboto({
+//   weight: ['400', '500', '700'],
+//   subsets: ['latin', 'cyrillic'],
+//   display: 'swap',
+//   variable: '--font-roboto'
+// })
+// const ubuntu = Ubuntu({
+//   weight: ['400', '500', '700'],
+//   subsets: ['latin', 'cyrillic'],
+//   display: 'swap',
+//   variable: '--font-ubuntu'
+// })
+const nunito = Nunito({
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin', 'cyrillic'],
   display: 'swap',
-  variable: '--font-roboto'
+  variable: '--font-nunito'
 })
 export const metadata: Metadata = {
   metadataBase: new URL('https://veles-net.com'), // Make sure this is your actual domain
@@ -68,7 +80,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="uk">
-      <body className={roboto.className}>
+      <body className={nunito.className}>
         {children}
       </body>
     </html>

@@ -84,6 +84,7 @@ const ConnectModal: React.FC<ConnectModalProps> = ({
   if (!isOpen) return null;
   
   return (
+    
     <div className="fixed inset-0 z-50 flex items-center justify-center" style={{
       backgroundImage: 'url("/wheat-field.png")',
       backgroundSize: 'cover',
